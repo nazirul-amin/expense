@@ -37,14 +37,25 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        $expense = new Expense([
-            'name' => $request->expense['name'],
-            'total' => $request->expense['total'],
-            'account_id' => $request->expense['account_id']
-        ]);
-        $expense->save();
+        $account = Account::where('id', $request->expense['account_id'])->first();
 
-        return response()->json('The Expense was successfully added');
+        if($account->balance < floatval($request->expense['total'])){
+            return response()->json('The account balance is low');
+        }
+
+        if($account->balance >= floatval($request->expense['total'])){
+            $expense = new Expense([
+                'name' => $request->expense['name'],
+                'total' => $request->expense['total'],
+                'account_id' => $request->expense['account_id']
+            ]);
+            $expense->save();
+
+            $account->balance = $account->balance - floatval($request->expense['total']);
+            $account->save();
+
+            return response()->json('The expense was successfully added');
+        }
     }
 
     /**
@@ -87,8 +98,13 @@ class ExpenseController extends Controller
      * @param  \App\Models\Expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Expense $expense)
+    public function destroy(Expense $expense, $id)
     {
-        //
+        $account = Account::where('id', Expense::where('id', $id)->first()->account_id)->first();
+        $account->balance = $account->balance + Expense::where('id', $id)->first()->total;
+        $account->save();
+
+        $expense->where('id', $id)->delete();
+        return response()->json('The Account successfully deleted');
     }
 }

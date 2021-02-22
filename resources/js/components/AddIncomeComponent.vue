@@ -1,24 +1,24 @@
 <template>
     <div>
-        <h3 class="text-center">Add New Expense</h3>
+        <h3 class="text-center">Add New Income</h3>
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form @submit.prevent="addExpense">
+                <form @submit.prevent="addIncome">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" v-model="expense.name">
+                        <input type="text" class="form-control" v-model="income.name">
                     </div>
                     <div class="form-group">
                         <label>Total</label>
-                        <input type="text" class="form-control" v-model="expense.total">
+                        <input type="text" class="form-control" v-model="income.total">
                     </div>
                     <div class="form-group">
-                        <label>Pay With</label>
-                        <select class="form-control" v-model="expense.account_id">
+                        <label>Account</label>
+                        <select class="form-control" v-model="income.account_id">
                             <option v-for="account in accounts" :value="account.id">{{ account.name }}</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add Expense</button>
+                    <button type="submit" class="btn btn-primary">Add Income</button>
                 </form>
             </div>
         </div>
@@ -29,7 +29,7 @@
     export default {
         data() {
             return {
-                expense: {},
+                income: {},
                 accounts: [],
             }
         },
@@ -43,12 +43,12 @@
             })
         },
         methods: {
-            addExpense() {
-                axios.post('/api/expense/add', {
-                    expense: this.expense
+            addIncome() {
+                axios.post('/api/income/add', {
+                    income: this.income
                 })
                 .then( response=>{
-                    this.$router.push({name: 'Expense'}).catch(err => {});
+                    this.$router.push({name: 'Income'}).catch(err => {});
                 })
                 .catch( error => {
                     console.log(error);

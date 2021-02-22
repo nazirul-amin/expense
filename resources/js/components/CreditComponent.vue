@@ -1,22 +1,21 @@
 <template>
     <div>
         <h3 class="text-center">Credit Debts</h3><br/>
-        <div class="table-borderless">
-            <router-link :to="{name: 'AddExpense'}" class="btn btn-success float-right mb-2"><i class="las la-plus"></i> Add</router-link>
+        <div v-if="!isMobile()" class="table-borderless">
             <table class="table table-hover">
                 <thead>
                 <tr>
                     <th>#</th>
                     <th>Name</th>
                     <th>Total</th>
-                    <th>Paid By</th>
+                    <th>Paid With</th>
                     <th>Created</th>
                     <th>Updated</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(expense, index) in expenses" :key="expense.id">
+                    <tr v-for="(expense, index) in expenses" :key="expense.id" v-if="expense.account.type_id==3">
                         <td>{{ index + 1 }}</td>
                         <td>{{ expense.name }}</td>
                         <td>RM{{ expense.total }}</td>
@@ -25,13 +24,30 @@
                         <td>{{ expense.updated_at }}</td>
                         <td>
                             <!-- <div class="btn-group" role="group"> -->
-                                <router-link :to="{name: 'editAccount', params: { id: expense.id }}"><i class="las la-edit text-info"></i></router-link>
-                                <a href="#" @click="deleteAccount(expense.id)"><i class="las la-trash text-danger"></i></a>
+                                <router-link :to="{name: 'EditAccount', params: { id: expense.id }}"><i class="las la-money-bill text-info">Pay</i></router-link>
                             <!-- </div> -->
                         </td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div v-if="isMobile()">
+            <div class="card" v-for="(expense, index) in expenses" :key="expense.id" v-if="expense.account.type_id==3">
+                <div class="card-info">
+                    <h2>{{ expense.name }}</h2>
+                    <div class="row">
+                        <div class="col-sm-6"><strong>Total : </strong>RM{{ expense.total }}</div>
+                        <div class="col-sm-6"><strong>Paid With : </strong>{{ expense.account.name }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6"><strong>Created at : </strong>{{ expense.created_at }}</div>
+                        <div class="col-sm-6"><strong>Updated at : </strong>{{ expense.updated_at }}</div>
+                    </div>
+                    <hr>
+                    <router-link :to="{name: 'EditAccount', params: { id: expense.id }}" class="text-right"><i class="las la-money-bill text-info">Pay</i></router-link>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -44,6 +60,7 @@
         data() {
             return {
                 expenses: [],
+                todayDate: new Date(),
             }
         },
         created() {
@@ -56,18 +73,14 @@
             })
         },
         methods: {
-            deleteAccount(id){
-                axios.delete('/api/account/delete/'+id, {
-                    account: this.account
-                })
-                .then( response=>{
-                    this.$router.push({name: 'Account'}).catch(err => {});
-                })
-                .catch( error => {
-                    console.log(error);
-                })
-                .finally(() => this.loading = false)
-            }
-        }
+            isMobile() {
+                if( screen.width <= 760 ) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            },
+        },
     }
 </script>
