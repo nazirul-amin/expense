@@ -18,6 +18,7 @@ class CreateExpensesTable extends Migration
             $table->string('name');
             $table->double('total');
             $table->integer('account_id');
+            $table->timestamp('paid')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
