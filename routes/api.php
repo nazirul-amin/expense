@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\IncomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,4 +35,12 @@ Route::group(['prefix' => 'expense'], function () {
     Route::get('edit/{id}', [ExpenseController::class, 'edit']);
     Route::post('update/{id}', [ExpenseController::class, 'update']);
     Route::delete('delete/{id}', [ExpenseController::class, 'destroy']);
+});
+
+Route::get('incomes', [IncomeController::class, 'index']);
+Route::group(['prefix' => 'income'], function () {
+    Route::post('add', [IncomeController::class, 'store']);
+    Route::get('edit/{id}', [IncomeController::class, 'edit']);
+    Route::post('update/{id}', [IncomeController::class, 'update']);
+    Route::delete('delete/{id}', [IncomeController::class, 'destroy']);
 });

@@ -14,8 +14,8 @@
                     </div>
                     <div class="form-group">
                         <label>Pay With</label>
-                        <select v-for="account in accounts" class="form-control" v-model="expense.account_id">
-                            <option :value="account.id">{{ account.name }}</option>
+                        <select class="form-control" v-model="expense.account_id">
+                            <option v-for="account in accounts" :value="account.id">{{ account.name }}</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Add Expense</button>

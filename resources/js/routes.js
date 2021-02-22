@@ -2,11 +2,15 @@ import Home from './components/HomeComponent.vue';
 
 import Account from './components/AccountComponent.vue';
 import AddAccount from './components/AddAccountComponent.vue';
+import EditAccount from './components/EditAccountComponent.vue';
 
 import Expense from './components/ExpenseComponent.vue';
 import AddExpense from './components/AddExpenseComponent.vue';
 
 import Credit from './components/CreditComponent.vue';
+
+import Income from './components/IncomeComponent.vue';
+import AddIncome from './components/AddIncomeComponent.vue';
 
 export default {
     mode: 'history',
@@ -29,9 +33,9 @@ export default {
             component: AddAccount
         },
         {
-            name: 'editAccount',
+            name: 'EditAccount',
             path: '/account/edit/:id',
-            component: AddAccount
+            component: EditAccount
         },
         {
             name: 'Expense',
@@ -47,6 +51,16 @@ export default {
             name: 'Credit',
             path: '/credit',
             component: Credit
+        },
+        {
+            name: 'Income',
+            path: '/income',
+            component: Income
+        },
+        {
+            name: 'AddIncome',
+            path: '/income/add',
+            component: AddIncome
         },
     ]
 }
