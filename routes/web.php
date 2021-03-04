@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,3 +28,7 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/accounts', [AccountController::class, 'index'])->name('accounts');
+Route::middleware(['auth:sanctum', 'verified'])->get('/accounts/create', [AccountController::class, 'create'])->name('accounts.create');
+Route::middleware(['auth:sanctum', 'verified'])->get('/accounts/{account}/edit', [AccountController::class, 'edit'])->name('accounts.edit');

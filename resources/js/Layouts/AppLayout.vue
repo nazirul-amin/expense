@@ -2,7 +2,7 @@
     <div>
         <jet-banner />
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="bg-gradient-to-r from-green-100 via-green-200 to-blue-100 min-h-screen">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,6 +19,9 @@
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
+                                </jet-nav-link>
+                                <jet-nav-link :href="route('accounts')" :active="route().current('accounts')">
+                                    Account
                                 </jet-nav-link>
                             </div>
                         </div>
@@ -143,6 +146,9 @@
                         <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('account')">
+                            Account
+                        </jet-responsive-nav-link>
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -222,9 +228,17 @@
             </header>
 
             <!-- Page Content -->
-            <main>
-                <slot></slot>
+            <main class="py-4 flex justify-center items-center">
+                <section class="bg-gradient-to-r from-blue-200 via-green-300 to-green-200 w-full md:w-3/5 z-10 md:rounded-3xl mx-auto" style="backdrop-filter: blur(2rem); min-height: 85vh;">
+                    <div class="games">
+                        <div class="cards">
+                            <slot></slot>
+                        </div>
+                    </div>
+                </section>
             </main>
+            <!-- <div class="circle1"></div>
+            <div class="circle2"></div> -->
         </div>
     </div>
 </template>
