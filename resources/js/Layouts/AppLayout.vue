@@ -146,7 +146,7 @@
                         <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </jet-responsive-nav-link>
-                        <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('account')">
+                        <jet-responsive-nav-link :href="route('accounts')" :active="route().current('account')">
                             Account
                         </jet-responsive-nav-link>
                     </div>
@@ -229,7 +229,7 @@
 
             <!-- Page Content -->
             <main class="py-4 flex justify-center items-center">
-                <section class="w-full md:w-3/5 z-10 md:rounded-3xl mx-auto" style="backdrop-filter: blur(2rem); min-height: 85vh; background: white; background: linear-gradient( to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));">
+                <section class="w-full md:w-3/5 z-10 md:rounded-3xl mx-auto" style="backdrop-filter: blur(2rem); min-height: 80vh; background: white; background: linear-gradient( to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));">
                     <div class="m-8">
                         <div class="cards">
                             <slot></slot>
