@@ -13,11 +13,14 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/glass.css') }}">
+        {{-- <link rel="stylesheet" href="{{ asset('css/glass.css') }}"> --}}
+
+        <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
 
         <!-- Scripts -->
         @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
+        <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
     </head>
     <body class="font-sans antialiased">
         @inertia

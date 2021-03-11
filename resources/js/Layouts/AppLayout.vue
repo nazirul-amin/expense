@@ -2,7 +2,7 @@
     <div>
         <jet-banner />
 
-        <div class="bg-gradient-to-r from-green-100 via-green-200 to-blue-100 min-h-screen">
+        <div class="bg-gradient-to-tr from-green-200 to-blue-100 min-h-screen">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -229,8 +229,8 @@
 
             <!-- Page Content -->
             <main class="py-4 flex justify-center items-center">
-                <section class="bg-gradient-to-r from-blue-200 via-green-300 to-green-200 w-full md:w-3/5 z-10 md:rounded-3xl mx-auto" style="backdrop-filter: blur(2rem); min-height: 85vh;">
-                    <div class="games">
+                <section class="w-full md:w-3/5 z-10 md:rounded-3xl mx-auto" style="backdrop-filter: blur(2rem); min-height: 85vh; background: white; background: linear-gradient( to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));">
+                    <div class="m-8">
                         <div class="cards">
                             <slot></slot>
                         </div>
