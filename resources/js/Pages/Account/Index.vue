@@ -36,7 +36,9 @@
                                 <tr v-for="account in accounts.data" :key="account.id">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">{{ account.name }}</div>
-                                        <div class="text-sm text-gray-500">{{ account.type_id }}</div>
+                                        <div v-if="account.type_id==1" class="text-sm text-gray-500">Cash</div>
+                                        <div v-if="account.type_id==2" class="text-sm text-gray-500">Bank</div>
+                                        <div v-if="account.type_id==3" class="text-sm text-gray-500">Card</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         {{ account.balance }}
@@ -50,8 +52,11 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         {{ account.updated_at }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <inertia-link class="text-indigo-600 hover:text-indigo-900" :href="route('accounts.destroy', account.id)">
+                                    <td class="px-6 py-6 whitespace-nowrap text-right text-sm font-medium">
+                                        <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('accounts.edit', account.id)">
+                                            <i class="las la-edit text-green-500">Edit</i>
+                                        </inertia-link>
+                                        <inertia-link class="text-indigo-600 hover:text-indigo-900" href="" @click="destroy(account.id)">
                                             <i class="las la-trash text-red-500">Delete</i>
                                         </inertia-link>
                                     </td>
@@ -69,15 +74,23 @@
         <div v-for="account in accounts.data" :key="account.id" class="flex bg-white rounded-2xl my-4 p-6 shadow-md justify-between md:hidden">
             <div class="flex flex-col flex-grow">
                 <h2>{{ account.name }}</h2>
-                <h3>{{ account.type_id }}</h3>
+                <h3 v-if="account.type_id==1">Cash</h3>
+                <h3 v-if="account.type_id==2">Bank</h3>
+                <h3 v-if="account.type_id==3">Card</h3>
                 <div><strong>Total : </strong>RM {{ account.balance }}</div>
                 <div><strong>Total : </strong>RM {{ account.created_at }}</div>
                 <div><strong>Total : </strong>RM {{ account.updated_at }}</div>
                 <div class="flex justify-end mt-6">
-                    <a href="#" class="text-right"><i class="las la-trash text-red-500">Delete</i></a>
+                    <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('accounts.edit', account.id)">
+                        <i class="las la-edit text-green-500">Edit</i>
+                    </inertia-link>
+                    <inertia-link class="text-indigo-600 hover:text-indigo-900" href="" @click="destroy(account.id)">
+                        <i class="las la-trash text-red-500">Delete</i>
+                    </inertia-link>
                 </div>
             </div>
         </div>
+        <pagination :data="accounts"></pagination>
     </app-layout>
 </template>
 
@@ -96,5 +109,12 @@
         props: {
             accounts: Object,
         },
+        methods: {
+            destroy(id) {
+                if (confirm('Are you sure you want to delete this account?')) {
+                    this.$inertia.delete(this.route('accounts.destroy', id))
+                }
+            },
+        }
     }
 </script>
