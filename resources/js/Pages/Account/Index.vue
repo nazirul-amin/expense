@@ -1,14 +1,6 @@
 <template>
     <app-layout>
         <div class="flex justify-end mb-6">
-            <!-- <search-filter v-model="form.search" class="w-full max-w-md" @reset="reset">
-                <label class="block text-gray-700">Trashed:</label>
-                <select v-model="form.trashed" class="mt-1 w-full form-select">
-                    <option :value="null" />
-                    <option value="with">With Trashed</option>
-                    <option value="only">Only Trashed</option>
-                </select>
-            </search-filter> -->
             <inertia-link class="rounded-xl text-sm text-center font-bold text-indigo-100 transition-colors duration-150 bg-indigo-700 p-4 whitespace-nowrap w-full md:w-auto" :href="route('accounts.create')">
                 New Account
             </inertia-link>
@@ -59,21 +51,20 @@
                                         {{ account.updated_at }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <inertia-link class="text-indigo-600 hover:text-indigo-900" :href="route('accounts.edit', account.id)">
+                                        <inertia-link class="text-indigo-600 hover:text-indigo-900" :href="route('accounts.destroy', account.id)">
                                             <i class="las la-trash text-red-500">Delete</i>
                                         </inertia-link>
                                     </td>
                                 </tr>
 
                                 <tr v-if="accounts.data.length === 0">
-                                    <td class="border-t px-6 py-4" colspan="4">No organizations found.</td>
+                                    <td class="border-t px-6 py-4" colspan="4">No accounts found.</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <pagination class="mt-6" :links="accounts.links" />
         </div>
         <div v-for="account in accounts.data" :key="account.id" class="flex bg-white rounded-2xl my-4 p-6 shadow-md justify-between md:hidden">
             <div class="flex flex-col flex-grow">
@@ -93,9 +84,6 @@
 <script>
     import AppLayout from '@/Layouts/AppLayout'
     import Welcome from '@/Jetstream/Welcome'
-    import pickBy from 'lodash/pickBy'
-    import throttle from 'lodash/throttle'
-    import mapValues from 'lodash/mapValues'
     import Pagination from '@/Components/Pagination'
 
     export default {
@@ -107,29 +95,6 @@
         },
         props: {
             accounts: Object,
-            filters: Object,
-        },
-        data() {
-            return {
-                form: {
-                    search: this.filters.search,
-                    trashed: this.filters.trashed,
-                },
-            }
-        },
-        watch: {
-            form: {
-                handler: throttle(function() {
-                    let query = pickBy(this.form)
-                    this.$inertia.replace(this.route('organizations', Object.keys(query).length ? query : { remember: 'forget' }))
-                }, 150),
-                deep: true,
-            },
-        },
-        methods: {
-            reset() {
-                this.form = mapValues(this.form, () => null)
-            },
         },
     }
 </script>

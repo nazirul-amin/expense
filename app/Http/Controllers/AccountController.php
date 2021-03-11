@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
-// use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 use Inertia\Inertia;
 
 class AccountController extends Controller
@@ -17,9 +17,9 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Account/Home', [
-            'filters' => Request::all('search', 'trashed'),
-            'accounts' => Account::orderBy('name')->filter(Request::only('search', 'trashed'))->paginate(),
+        return Inertia::render('Account/Index', [
+            'filters' => FacadesRequest::all('search', 'trashed'),
+            'accounts' => Account::orderBy('name')->paginate(),
         ]);
     }
 
@@ -30,7 +30,7 @@ class AccountController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Account/Create');
     }
 
     /**
@@ -41,7 +41,19 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        FacadesRequest::validate([
+            'account_name' => 'required',
+            'account_balance' => 'required',
+        ]);
+
+        Account::create([
+            'name' => $request->account_name,
+            'balance' => $request->account_balance,
+        ]);
+
+        $request->session()->flash('flash.banner', 'Account Created');
+        $request->session()->flash('flash.bannerStyle', 'success');
+        return Redirect::route('accounts.create');
     }
 
     /**
@@ -86,6 +98,8 @@ class AccountController extends Controller
      */
     public function destroy(Account $account)
     {
-        //
+        $account->delete();
+
+        return Redirect::back()->with('success', 'Account deleted.');
     }
 }
