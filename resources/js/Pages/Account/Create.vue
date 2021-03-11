@@ -13,6 +13,17 @@
                 <div v-if="errors.account_balance" class="text-red-500">{{ errors.account_balance }}</div>
             </div>
 
+            <div class="mt-2">
+                <jet-label for="account_type" value="Account Type" />
+                <select id="account_type" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.account_type">
+                    <option value="">Please Choose</option>
+                    <option value="1">Cash</option>
+                    <option value="2">Bank</option>
+                    <option value="3">Credit</option>
+                </select>
+                <div v-if="errors.account_type" class="text-red-500">{{ errors.account_type }}</div>
+            </div>
+
             <jet-action-message :on="form.recentlySuccessful" class="mt-2 mr-3">
                 Saved.
             </jet-action-message>
@@ -40,14 +51,12 @@
             JetLabel,
             JetActionMessage,
         },
-        props: {
-            errors: Object,
-        },
         data() {
             return {
                 form: this.$inertia.form({
                     account_name: '',
                     account_balance: '',
+                    account_type: '',
                 }),
             }
         },
