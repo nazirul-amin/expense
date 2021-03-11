@@ -19,7 +19,7 @@ class AccountController extends Controller
     {
         return Inertia::render('Account/Index', [
             'filters' => FacadesRequest::all('search', 'trashed'),
-            'accounts' => Account::orderBy('name')->paginate(),
+            'accounts' => Account::orderBy('name')->paginate(10),
         ]);
     }
 
@@ -44,11 +44,13 @@ class AccountController extends Controller
         FacadesRequest::validate([
             'account_name' => 'required',
             'account_balance' => 'required',
+            'account_type' => 'required',
         ]);
 
         Account::create([
             'name' => $request->account_name,
             'balance' => $request->account_balance,
+            'type_id' => $request->account_type,
         ]);
 
         $request->session()->flash('flash.banner', 'Account Created');
@@ -75,7 +77,14 @@ class AccountController extends Controller
      */
     public function edit(Account $account)
     {
-        //
+        return Inertia::render('Account/Edit', [
+            'account' => [
+                'id' => $account->id,
+                'account_name' => $account->name,
+                'account_balance' => $account->balance,
+                'account_type' => $account->type_id,
+            ],
+        ]);
     }
 
     /**
@@ -87,7 +96,20 @@ class AccountController extends Controller
      */
     public function update(Request $request, Account $account)
     {
-        //
+        $request->validate([
+            'account_name' => 'required',
+            'account_balance' => 'required',
+            'account_type' => 'required',
+        ]);
+
+        $account->name = $request->account_name;
+        $account->balance = $request->account_balance;
+        $account->type_id = $request->account_type;
+        $account->save();
+
+        $request->session()->flash('flash.banner', 'Account Updated');
+        $request->session()->flash('flash.bannerStyle', 'success');
+        return Redirect::back();
     }
 
     /**
@@ -96,10 +118,13 @@ class AccountController extends Controller
      * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Account $account)
+    public function destroy(Account $account, Request $request)
     {
         $account->delete();
 
-        return Redirect::back()->with('success', 'Account deleted.');
+        $request->session()->flash('flash.banner', 'Account Deleted');
+        $request->session()->flash('flash.bannerStyle', 'success');
+
+        return Redirect::route('accounts');
     }
 }
