@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\IncomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -51,9 +52,9 @@ Route::middleware(['auth:sanctum', 'verified'])->put('/expenses/{expense}', [Exp
 Route::middleware(['auth:sanctum', 'verified'])->delete('/expenses/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
 
 //----- income route -----//
-Route::middleware(['auth:sanctum', 'verified'])->get('/incomes', [ExpenseController::class, 'index'])->name('incomes');
-Route::middleware(['auth:sanctum', 'verified'])->get('/incomes/create', [ExpenseController::class, 'create'])->name('incomes.create');
-Route::middleware(['auth:sanctum', 'verified'])->post('/incomes', [ExpenseController::class, 'store'])->name('incomes.store');
-Route::middleware(['auth:sanctum', 'verified'])->get('/incomes/{income}/edit', [ExpenseController::class, 'edit'])->name('incomes.edit');
-Route::middleware(['auth:sanctum', 'verified'])->put('/incomes/{income}', [ExpenseController::class, 'update'])->name('incomes.update');
-Route::middleware(['auth:sanctum', 'verified'])->delete('/incomes/{income}', [ExpenseController::class, 'destroy'])->name('incomes.destroy');
+Route::middleware(['auth:sanctum', 'verified'])->get('/incomes', [IncomeController::class, 'index'])->name('incomes');
+Route::middleware(['auth:sanctum', 'verified'])->get('/incomes/create', [IncomeController::class, 'create'])->name('incomes.create');
+Route::middleware(['auth:sanctum', 'verified'])->post('/incomes', [IncomeController::class, 'store'])->name('incomes.store');
+Route::middleware(['auth:sanctum', 'verified'])->get('/incomes/{income}/edit', [IncomeController::class, 'edit'])->name('incomes.edit');
+Route::middleware(['auth:sanctum', 'verified'])->put('/incomes/{income}', [IncomeController::class, 'update'])->name('incomes.update');
+Route::middleware(['auth:sanctum', 'verified'])->delete('/incomes/{income}', [IncomeController::class, 'destroy'])->name('incomes.destroy');

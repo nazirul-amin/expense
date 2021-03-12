@@ -82,7 +82,7 @@ class IncomeController extends Controller
     public function destroy(Transaction $income, Request $request)
     {
         $account = Account::where('id', $income->account_id)->first();
-        $account->balance = $account->balance + $income->total;
+        $account->balance = $account->balance - $income->total;
         $account->save();
 
         $income->delete();

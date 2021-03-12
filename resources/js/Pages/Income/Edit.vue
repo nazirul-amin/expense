@@ -2,23 +2,23 @@
     <app-layout>
         <form @submit.prevent="update" class="flex flex-col justify-center w-full md:w-6/12 mx-auto">
             <div class="mt-2">
-                <jet-label for="expense_name" value="Expense Name" />
-                <jet-input id="expense_name" type="text" class="mt-1 block w-full" v-model="form.expense_name" autocomplete="off" />
-                <div v-if="errors.expense_name" class="text-red-500">{{ errors.expense_name }}</div>
+                <jet-label for="income_name" value="Income Name" />
+                <jet-input id="income_name" type="text" class="mt-1 block w-full" v-model="form.income_name" autocomplete="off" />
+                <div v-if="errors.income_name" class="text-red-500">{{ errors.income_name }}</div>
             </div>
 
             <div class="mt-2">
-                <jet-label for="expense_total" value="Expense Total" />
-                <jet-input id="expense_total" type="text" class="mt-1 block w-full" v-model="form.expense_total" readonly="true" autocomplete="off" />
+                <jet-label for="income_total" value="Income Total" />
+                <jet-input id="income_total" type="text" class="mt-1 block w-full" v-model="form.income_total" readonly="true" autocomplete="off" />
             </div>
 
             <div class="mt-2">
-                <jet-label for="pay_with" value="Pay With" />
-                <select id="pay_with" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.pay_with">
+                <jet-label for="account" value="Pay With" />
+                <select id="account" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.account">
                     <option value="">Please Choose</option>
                     <option v-for="account in accounts" :value="account.id">{{ account.name }}</option>
                 </select>
-                <div v-if="errors.pay_with" class="text-red-500">{{ errors.pay_with }}</div>
+                <div v-if="errors.account" class="text-red-500">{{ errors.account }}</div>
             </div>
 
             <jet-action-message :on="form.recentlySuccessful" class="mt-2 mr-3">
@@ -57,25 +57,25 @@
         },
         props: {
             accounts: Object,
-            expense: Object,
+            income: Object,
             errors: Object,
         },
         data() {
             return {
                 form: this.$inertia.form({
-                    expense_name: this.expense.expense_name,
-                    expense_total: this.expense.expense_total,
-                    pay_with: this.expense.pay_with,
+                    income_name: this.income.income_name,
+                    income_total: this.income.income_total,
+                    account: this.income.account,
                 }),
             }
         },
         methods: {
             update() {
-                this.form.put(this.route('expenses.update', this.expense.id))
+                this.form.put(this.route('incomes.update', this.income.id))
             },
             destroy() {
-                if (confirm('Are you sure you want to delete this expense?')) {
-                    this.$inertia.delete(this.route('expenses.destroy', this.expense.id))
+                if (confirm('Are you sure you want to delete this income?')) {
+                    this.$inertia.delete(this.route('incomes.destroy', this.income.id))
                 }
             },
         },
