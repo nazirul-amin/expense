@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ExpenseController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,9 +34,18 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
+//----- account route -----//
 Route::middleware(['auth:sanctum', 'verified'])->get('/accounts', [AccountController::class, 'index'])->name('accounts');
 Route::middleware(['auth:sanctum', 'verified'])->get('/accounts/create', [AccountController::class, 'create'])->name('accounts.create');
 Route::middleware(['auth:sanctum', 'verified'])->post('/accounts', [AccountController::class, 'store'])->name('accounts.store');
 Route::middleware(['auth:sanctum', 'verified'])->get('/accounts/{account}/edit', [AccountController::class, 'edit'])->name('accounts.edit');
 Route::middleware(['auth:sanctum', 'verified'])->put('/accounts/{account}', [AccountController::class, 'update'])->name('accounts.update');
 Route::middleware(['auth:sanctum', 'verified'])->delete('/accounts/{account}', [AccountController::class, 'destroy'])->name('accounts.destroy');
+
+//----- expense route -----//
+Route::middleware(['auth:sanctum', 'verified'])->get('/expenses', [ExpenseController::class, 'index'])->name('expenses');
+Route::middleware(['auth:sanctum', 'verified'])->get('/expenses/create', [ExpenseController::class, 'create'])->name('expenses.create');
+Route::middleware(['auth:sanctum', 'verified'])->post('/expenses', [ExpenseController::class, 'store'])->name('expenses.store');
+Route::middleware(['auth:sanctum', 'verified'])->get('/expenses/{expense}/edit', [ExpenseController::class, 'edit'])->name('expenses.edit');
+Route::middleware(['auth:sanctum', 'verified'])->put('/expenses/{expense}', [ExpenseController::class, 'update'])->name('expenses.update');
+Route::middleware(['auth:sanctum', 'verified'])->delete('/expenses/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
