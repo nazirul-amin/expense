@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Inertia\Inertia;
@@ -18,8 +19,7 @@ class AccountController extends Controller
     public function index()
     {
         return Inertia::render('Account/Index', [
-            'filters' => FacadesRequest::all('search', 'trashed'),
-            'accounts' => Account::orderBy('name')->paginate(10),
+            'accounts' => Account::orderBy('name')->where('user_id', Auth::id())->paginate(10),
         ]);
     }
 
@@ -51,6 +51,7 @@ class AccountController extends Controller
             'name' => $request->account_name,
             'balance' => $request->account_balance,
             'type_id' => $request->account_type,
+            'user_id' => Auth::id(),
         ]);
 
         $request->session()->flash('flash.banner', 'Account Created');

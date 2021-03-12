@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
-use App\Models\Expense;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Inertia\Inertia;
@@ -13,9 +14,8 @@ class ExpenseController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Expense/Index', [
-            'expenses' => Expense::orderBy('name')->paginate(10),
-        ]);
+        $data['expenses'] = Transaction::orderBy('name')->where('transaction_type', 'Expense')->where('user_id', Auth::id())->paginate(10);
+        return Inertia::render('Expense/Index', $data);
     }
 
     public function create()
@@ -42,10 +42,12 @@ class ExpenseController extends Controller
         }
 
         if($account->balance >= floatval($request->expense_total)){
-            Expense::create([
+            Transaction::create([
                 'name' => $request->expense_name,
                 'total' => $request->expense_total,
                 'account_id' => $request->pay_with,
+                'user_id' => Auth::id(),
+                'transaction_type' => 'Expense',
             ]);
 
             $account->balance = $account->balance - floatval($request->expense_total);
@@ -57,7 +59,7 @@ class ExpenseController extends Controller
         }
     }
 
-    public function edit(Expense $expense)
+    public function edit(Transaction $expense)
     {
         return Inertia::render('Expense/Edit', [
             'accounts' => Account::orderBy('name')->get(),
@@ -70,7 +72,7 @@ class ExpenseController extends Controller
         ]);
     }
 
-    public function update(Request $request, Expense $expense)
+    public function update(Request $request, Transaction $expense)
     {
         $request->validate([
             'expense_name' => 'required',
@@ -86,7 +88,7 @@ class ExpenseController extends Controller
         return Redirect::back();
     }
 
-    public function destroy(Expense $expense, Request $request)
+    public function destroy(Transaction $expense, Request $request)
     {
         $account = Account::where('id', $expense->account_id)->first();
         $account->balance = $account->balance + $expense->total;
