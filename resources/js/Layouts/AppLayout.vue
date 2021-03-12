@@ -26,6 +26,9 @@
                                 <jet-nav-link :href="route('expenses')" :active="route().current('expenses')">
                                     Expense
                                 </jet-nav-link>
+                                <jet-nav-link :href="route('incomes')" :active="route().current('incomes')">
+                                    Income
+                                </jet-nav-link>
                             </div>
                         </div>
 
@@ -154,6 +157,9 @@
                         </jet-responsive-nav-link>
                         <jet-responsive-nav-link :href="route('expenses')" :active="route().current('expenses')">
                             Expense
+                        </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :href="route('incomes')" :active="route().current('incomes')">
+                            Income
                         </jet-responsive-nav-link>
                     </div>
 

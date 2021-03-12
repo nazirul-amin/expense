@@ -24,8 +24,8 @@ class Account extends Model
         return Carbon::parse($value)->format('d-m-Y');
     }
 
-    public function expense()
+    public function transaction()
     {
-        return $this->hasOne(Expense::class);
+        return $this->hasOne(Transaction::class);
     }
 }

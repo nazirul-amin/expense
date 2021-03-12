@@ -18,6 +18,7 @@ class CreateAccountsTable extends Migration
             $table->string('name')->nullable();
             $table->double('balance')->nullable();
             $table->integer('type_id')->nullable();
+            $table->integer('user_id');
             $table->softDeletes();
             $table->timestamps();
         });

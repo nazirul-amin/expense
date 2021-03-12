@@ -19,6 +19,9 @@
                                         Total
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Pay With
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Created At
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -33,9 +36,9 @@
                                 <tr v-for="expense in expenses.data" :key="expense.id">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">{{ expense.name }}</div>
-                                        <div v-if="expense.type_id==1" class="text-sm text-gray-500">Cash</div>
-                                        <div v-if="expense.type_id==2" class="text-sm text-gray-500">Bank</div>
-                                        <div v-if="expense.type_id==3" class="text-sm text-gray-500">Card</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {{ expense.account.name }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         {{ expense.total }}
@@ -54,7 +57,7 @@
                                 </tr>
 
                                 <tr v-if="expenses.data.length === 0">
-                                    <td class="border-t px-6 py-4" colspan="5">No expenses found.</td>
+                                    <td class="border-t px-6 py-5" colspan="5">No expenses found.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -65,12 +68,10 @@
         <div v-for="expense in expenses.data" :key="expense.id" class="flex bg-white rounded-2xl my-4 p-6 shadow-md justify-between md:hidden">
             <div class="flex flex-col flex-grow">
                 <h2>{{ expense.name }}</h2>
-                <h3 v-if="expense.type_id==1">Cash</h3>
-                <h3 v-if="expense.type_id==2">Bank</h3>
-                <h3 v-if="expense.type_id==3">Card</h3>
-                <div><strong>Total : </strong>RM {{ expense.balance }}</div>
-                <div><strong>Total : </strong>RM {{ expense.created_at }}</div>
-                <div><strong>Total : </strong>RM {{ expense.updated_at }}</div>
+                <h3>Pay with : {{ expense.account.name }}</h3>
+                <div><strong>Total : </strong>RM {{ expense.total }}</div>
+                <div><strong>Created at : </strong>RM {{ expense.created_at }}</div>
+                <div><strong>Updated at : </strong>RM {{ expense.updated_at }}</div>
                 <div class="flex justify-end mt-6">
                     <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('expenses.edit', expense.id)">
                         <i class="las la-edit text-green-500">Edit</i>

@@ -49,3 +49,11 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/expenses', [ExpenseContr
 Route::middleware(['auth:sanctum', 'verified'])->get('/expenses/{expense}/edit', [ExpenseController::class, 'edit'])->name('expenses.edit');
 Route::middleware(['auth:sanctum', 'verified'])->put('/expenses/{expense}', [ExpenseController::class, 'update'])->name('expenses.update');
 Route::middleware(['auth:sanctum', 'verified'])->delete('/expenses/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
+
+//----- income route -----//
+Route::middleware(['auth:sanctum', 'verified'])->get('/incomes', [ExpenseController::class, 'index'])->name('incomes');
+Route::middleware(['auth:sanctum', 'verified'])->get('/incomes/create', [ExpenseController::class, 'create'])->name('incomes.create');
+Route::middleware(['auth:sanctum', 'verified'])->post('/incomes', [ExpenseController::class, 'store'])->name('incomes.store');
+Route::middleware(['auth:sanctum', 'verified'])->get('/incomes/{income}/edit', [ExpenseController::class, 'edit'])->name('incomes.edit');
+Route::middleware(['auth:sanctum', 'verified'])->put('/incomes/{income}', [ExpenseController::class, 'update'])->name('incomes.update');
+Route::middleware(['auth:sanctum', 'verified'])->delete('/incomes/{income}', [ExpenseController::class, 'destroy'])->name('incomes.destroy');
