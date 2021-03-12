@@ -51,6 +51,9 @@
             JetLabel,
             JetActionMessage,
         },
+        props: {
+            errors: Object,
+        },
         data() {
             return {
                 form: this.$inertia.form({

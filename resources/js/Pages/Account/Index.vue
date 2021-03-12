@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <div class="flex justify-end mb-6">
-            <inertia-link class="rounded-xl text-sm text-center font-bold text-indigo-100 transition-colors duration-150 bg-indigo-700 p-4 whitespace-nowrap w-full md:w-auto" :href="route('accounts.create')">
+            <inertia-link class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg" :href="route('accounts.create')">
                 New Account
             </inertia-link>
         </div>
@@ -63,7 +63,7 @@
                                 </tr>
 
                                 <tr v-if="accounts.data.length === 0">
-                                    <td class="border-t px-6 py-4" colspan="4">No accounts found.</td>
+                                    <td class="border-t px-6 py-4" colspan="6">No accounts found.</td>
                                 </tr>
                             </tbody>
                         </table>

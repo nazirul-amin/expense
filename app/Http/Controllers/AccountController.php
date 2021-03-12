@@ -107,7 +107,7 @@ class AccountController extends Controller
         $account->type_id = $request->account_type;
         $account->save();
 
-        $request->session()->flash('flash.banner', 'Account Updated');
+        $request->session()->flash('flash.banner', 'Account updated');
         $request->session()->flash('flash.bannerStyle', 'success');
         return Redirect::back();
     }
@@ -122,7 +122,7 @@ class AccountController extends Controller
     {
         $account->delete();
 
-        $request->session()->flash('flash.banner', 'Account Deleted');
+        $request->session()->flash('flash.banner', 'Account deleted');
         $request->session()->flash('flash.bannerStyle', 'success');
 
         return Redirect::route('accounts');

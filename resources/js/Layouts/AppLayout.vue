@@ -23,6 +23,9 @@
                                 <jet-nav-link :href="route('accounts')" :active="route().current('accounts')">
                                     Account
                                 </jet-nav-link>
+                                <jet-nav-link :href="route('expenses')" :active="route().current('expenses')">
+                                    Expense
+                                </jet-nav-link>
                             </div>
                         </div>
 
@@ -146,8 +149,11 @@
                         <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </jet-responsive-nav-link>
-                        <jet-responsive-nav-link :href="route('accounts')" :active="route().current('account')">
+                        <jet-responsive-nav-link :href="route('accounts')" :active="route().current('accounts')">
                             Account
+                        </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :href="route('expenses')" :active="route().current('expenses')">
+                            Expense
                         </jet-responsive-nav-link>
                     </div>
 
