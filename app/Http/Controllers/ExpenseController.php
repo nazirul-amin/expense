@@ -14,7 +14,7 @@ class ExpenseController extends Controller
 {
     public function index()
     {
-        $data['expenses'] = Transaction::orderBy('name')->where('transaction_type', 'Expense')->where('user_id', Auth::id())->paginate(10);
+        $data['expenses'] = Transaction::with('account')->orderBy('name')->where('transaction_type', 'Expense')->where('user_id', Auth::id())->paginate(10);
         return Inertia::render('Expense/Index', $data);
     }
 

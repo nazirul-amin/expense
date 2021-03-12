@@ -1,8 +1,8 @@
 <template>
     <app-layout>
         <div class="flex justify-end mb-6">
-            <inertia-link class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg" :href="route('expenses.create')">
-                New Expense
+            <inertia-link class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg" :href="route('incomes.create')">
+                New Income
             </inertia-link>
         </div>
         <div class="flex flex-col hidden md:block">
@@ -16,10 +16,10 @@
                                         Name
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Total
+                                        Account
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Pay With
+                                        Total
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Created At
@@ -33,31 +33,31 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                <tr v-for="expense in expenses.data" :key="expense.id">
+                                <tr v-for="income in incomes.data" :key="income.id">
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">{{ expense.name }}</div>
+                                        <div class="text-sm text-gray-900">{{ income.name }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ expense.account.name }}
+                                        {{ income.account.name }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ expense.total }}
+                                        {{ income.total }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ expense.created_at }}
+                                        {{ income.created_at }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ expense.updated_at }}
+                                        {{ income.updated_at }}
                                     </td>
                                     <td class="px-6 py-6 whitespace-nowrap text-right text-sm font-medium">
-                                        <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('expenses.edit', expense.id)">
+                                        <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('incomes.edit', income.id)">
                                             <i class="las la-edit text-green-500">Edit</i>
                                         </inertia-link>
                                     </td>
                                 </tr>
 
-                                <tr v-if="expenses.data.length === 0">
-                                    <td class="border-t px-6 py-5" colspan="5">No expenses found.</td>
+                                <tr v-if="incomes.data.length === 0">
+                                    <td class="border-t px-6 py-5" colspan="6">No incomes found.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -65,21 +65,21 @@
                 </div>
             </div>
         </div>
-        <div v-for="expense in expenses.data" :key="expense.id" class="flex bg-white rounded-2xl my-4 p-6 shadow-md justify-between md:hidden">
+        <div v-for="income in incomes.data" :key="income.id" class="flex bg-white rounded-2xl my-4 p-6 shadow-md justify-between md:hidden">
             <div class="flex flex-col flex-grow">
-                <h2>{{ expense.name }}</h2>
-                <h3>Pay with : {{ expense.account.name }}</h3>
-                <div><strong>Total : </strong>RM {{ expense.total }}</div>
-                <div><strong>Created at : </strong>RM {{ expense.created_at }}</div>
-                <div><strong>Updated at : </strong>RM {{ expense.updated_at }}</div>
+                <h2>{{ income.name }}</h2>
+                <h3>Account : {{ income.account.name }}</h3>
+                <div><strong>Total : </strong>RM {{ income.total }}</div>
+                <div><strong>Created at : </strong>RM {{ income.created_at }}</div>
+                <div><strong>Updated at : </strong>RM {{ income.updated_at }}</div>
                 <div class="flex justify-end mt-6">
-                    <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('expenses.edit', expense.id)">
+                    <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('incomes.edit', income.id)">
                         <i class="las la-edit text-green-500">Edit</i>
                     </inertia-link>
                 </div>
             </div>
         </div>
-        <pagination :data="expenses"></pagination>
+        <pagination :data="incomes"></pagination>
     </app-layout>
 </template>
 
@@ -89,14 +89,14 @@
     import Pagination from '@/Components/Pagination'
 
     export default {
-        metaInfo: { title: 'expenses' },
+        metaInfo: { title: 'incomes' },
         components: {
             AppLayout,
             Welcome,
             Pagination,
         },
         props: {
-            expenses: Object,
+            incomes: Object,
         },
     }
 </script>

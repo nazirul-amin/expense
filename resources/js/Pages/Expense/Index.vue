@@ -16,10 +16,10 @@
                                         Name
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Total
+                                        Pay With
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Pay With
+                                        Total
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Created At
@@ -57,7 +57,7 @@
                                 </tr>
 
                                 <tr v-if="expenses.data.length === 0">
-                                    <td class="border-t px-6 py-5" colspan="5">No expenses found.</td>
+                                    <td class="border-t px-6 py-5" colspan="6">No expenses found.</td>
                                 </tr>
                             </tbody>
                         </table>

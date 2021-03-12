@@ -14,7 +14,7 @@ class IncomeController extends Controller
 {
     public function index()
     {
-        $data['incomes'] = Transaction::orderBy('name')->where('transaction_type', 'Income')->where('user_id', Auth::id())->paginate(10);
+        $data['incomes'] = Transaction::with('account')->orderBy('name')->where('transaction_type', 'Income')->where('user_id', Auth::id())->paginate(10);
         return Inertia::render('Income/Index', $data);
     }
 
