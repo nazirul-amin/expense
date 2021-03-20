@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CreditController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\IncomeController;
 use Illuminate\Foundation\Application;
@@ -58,3 +59,11 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/incomes', [IncomeControl
 Route::middleware(['auth:sanctum', 'verified'])->get('/incomes/{income}/edit', [IncomeController::class, 'edit'])->name('incomes.edit');
 Route::middleware(['auth:sanctum', 'verified'])->put('/incomes/{income}', [IncomeController::class, 'update'])->name('incomes.update');
 Route::middleware(['auth:sanctum', 'verified'])->delete('/incomes/{income}', [IncomeController::class, 'destroy'])->name('incomes.destroy');
+
+//----- credit route -----//
+Route::middleware(['auth:sanctum', 'verified'])->get('/credits', [CreditController::class, 'index'])->name('credits');
+Route::middleware(['auth:sanctum', 'verified'])->get('/credits/create', [CreditController::class, 'create'])->name('credits.create');
+Route::middleware(['auth:sanctum', 'verified'])->post('/credits', [CreditController::class, 'store'])->name('credits.store');
+Route::middleware(['auth:sanctum', 'verified'])->get('/credits/{credit}/edit', [CreditController::class, 'edit'])->name('credits.edit');
+Route::middleware(['auth:sanctum', 'verified'])->put('/credits/{credit}', [CreditController::class, 'update'])->name('credits.update');
+Route::middleware(['auth:sanctum', 'verified'])->delete('/credits/{expense}', [CreditController::class, 'destroy'])->name('credits.destroy');

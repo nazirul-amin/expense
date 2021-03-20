@@ -1,5 +1,10 @@
 <template>
     <app-layout>
+        <template #header>
+            <ol class="list-reset flex text-grey-dark">
+                <inertia-link class="" :href="route('incomes')">Incomes</inertia-link>
+            </ol>
+        </template>
         <div class="flex justify-end mb-6">
             <inertia-link class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg" :href="route('incomes.create')">
                 New Income

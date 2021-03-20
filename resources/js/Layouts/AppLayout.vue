@@ -18,7 +18,7 @@
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                    Home
                                 </jet-nav-link>
                                 <jet-nav-link :href="route('accounts')" :active="route().current('accounts')">
                                     Account
@@ -29,6 +29,9 @@
                                 <jet-nav-link :href="route('incomes')" :active="route().current('incomes')">
                                     Income
                                 </jet-nav-link>
+                                <!-- <jet-nav-link :href="route('credits')" :active="route().current('credits')">
+                                    Credit
+                                </jet-nav-link> -->
                             </div>
                         </div>
 
@@ -150,7 +153,7 @@
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
                         <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
+                            Home
                         </jet-responsive-nav-link>
                         <jet-responsive-nav-link :href="route('accounts')" :active="route().current('accounts')">
                             Account
@@ -161,6 +164,9 @@
                         <jet-responsive-nav-link :href="route('incomes')" :active="route().current('incomes')">
                             Income
                         </jet-responsive-nav-link>
+                        <!-- <jet-responsive-nav-link :href="route('credits')" :active="route().current('credits')">
+                            Credit
+                        </jet-responsive-nav-link> -->
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -233,11 +239,15 @@
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white shadow" v-if="$slots.header">
+            <!-- <header class="bg-white shadow md:hidden" v-if="$slots.header">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <slot name="header"></slot>
                 </div>
-            </header>
+            </header> -->
+
+            <nav class="bg-white shadow max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 md:hidden">
+                <slot name="header"></slot>
+            </nav>
 
             <!-- Page Content -->
             <main class="py-4 flex justify-center items-center">

@@ -1,5 +1,12 @@
 <template>
     <app-layout>
+        <template #header>
+            <ol class="list-reset flex text-grey-dark">
+                <inertia-link class="" :href="route('incomes')">Incomes</inertia-link>
+                <li><span class="mx-2">/</span></li>
+                <inertia-link class="" href="">Create</inertia-link>
+            </ol>
+        </template>
         <form @submit.prevent="store" class="flex flex-col justify-center w-full md:w-6/12 mx-auto">
             <div class="mt-2">
                 <jet-label for="income_name" value="Income Name" />
