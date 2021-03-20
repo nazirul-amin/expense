@@ -21,7 +21,7 @@ class IncomeController extends Controller
     public function create()
     {
         return Inertia::render('Income/Create', [
-            'accounts' => Account::orderBy('name')->get(),
+            'accounts' => Account::orderBy('name')->where('user_id', Auth::id())->get(),
         ]);
     }
 
