@@ -20,7 +20,6 @@
         <!-- Scripts -->
         @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
-        <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
     </head>
     <body class="font-sans antialiased">
         @inertia
