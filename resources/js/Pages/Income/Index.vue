@@ -84,7 +84,10 @@
                 </div>
             </div>
         </div>
-        <pagination :data="incomes"></pagination>
+        <div v-if="!incomes.data.length" class="flex bg-white rounded-2xl my-4 p-6 shadow-md justify-between md:hidden">
+            <h2>No incomes found.</h2>
+        </div>
+        <pagination v-if="incomes.data.length" :data="incomes"></pagination>
     </app-layout>
 </template>
 

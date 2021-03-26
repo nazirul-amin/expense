@@ -84,7 +84,10 @@
                 </div>
             </div>
         </div>
-        <pagination :data="expenses"></pagination>
+        <div v-if="!expenses.data.length" class="flex bg-white rounded-2xl my-4 p-6 shadow-md justify-between md:hidden">
+            <h2>No expenses found.</h2>
+        </div>
+        <pagination v-if="expenses.data.length" :data="expenses"></pagination>
     </app-layout>
 </template>
 

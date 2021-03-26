@@ -4,11 +4,16 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CreditController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\IncomeController;
+use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Inertia\Inertia;
+
+use Spatie\Activitylog\Models\Activity;
 
 if (App::environment('production')) {
     URL::forceScheme('https');
@@ -39,7 +44,72 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $chartData = Transaction::with('account')->orderBy('name')->where('user_id', Auth::id())->paginate(10);
+    // $incomes = Transaction::with('account')->orderBy('name')->where('transaction_type', 'Expense')->where('user_id', Auth::id())->paginate(10);
+
+    $x = 0;
+    foreach ($chartData as $data) {
+        $datasets[$x]['label'] = $data->name;
+        if($data->transaction_type == 'Expense'){
+            $datasets[$x]['backgroundColor'] = '#ec4646';
+        }
+        if($data->transaction_type == 'Income'){
+            $datasets[$x]['backgroundColor'] = '#9ddfd3';
+        }
+        $datasets[$x]['data'] = [['x' => Carbon::parse($data->created_at)->format('d/m/Y'), 'y'=> $data->total]];
+        $x++;
+    }
+    // dump($datasets);
+    $data['charts'] =[
+        // 'labels'  => ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        'datasets' => [
+            [
+                'label' => 'Expense',
+                'backgroundColor' => '#ec4646',
+                'borderColor' => '#ec4646',
+                'fill' => 'false',
+                'data' => [
+                        ['x' => Carbon::parse('03/01/2021')->format('d/m/Y'), 'y'=> 2000],
+                        ['x' => Carbon::parse('03/02/2021')->format('d/m/Y'), 'y'=> 3500],
+                        ['x' => Carbon::parse('03/03/2021')->format('d/m/Y'), 'y'=> 1000],
+                        ['x' => Carbon::parse('03/04/2021')->format('d/m/Y'), 'y'=> 2000],
+                        ['x' => Carbon::parse('03/05/2021')->format('d/m/Y'), 'y'=> 1000],
+                        ['x' => Carbon::parse('03/06/2021')->format('d/m/Y'), 'y'=> 3500],
+                        ['x' => Carbon::parse('03/07/2021')->format('d/m/Y'), 'y'=> 2000],
+                        ['x' => Carbon::parse('03/08/2021')->format('d/m/Y'), 'y'=> 1000],
+                        ['x' => Carbon::parse('03/09/2021')->format('d/m/Y'), 'y'=> 2000],
+                        ['x' => Carbon::parse('03/10/2021')->format('d/m/Y'), 'y'=> 1000],
+                        ['x' => Carbon::parse('03/11/2021')->format('d/m/Y'), 'y'=> 3500],
+                        ['x' => Carbon::parse('03/12/2021')->format('d/m/Y'), 'y'=> 3500],
+                    ]
+            ],
+            [
+                'label' => 'Income',
+                'backgroundColor' => '#9ddfd3',
+                'borderColor' => '#9ddfd3',
+                'fill' => 'false',
+                'data' => [
+                        ['x' => Carbon::parse('05/01/2021')->format('d/m/Y'), 'y'=> 5000],
+                        ['x' => Carbon::parse('05/02/2021')->format('d/m/Y'), 'y'=> 5000],
+                        ['x' => Carbon::parse('05/03/2021')->format('d/m/Y'), 'y'=> 5000],
+                        ['x' => Carbon::parse('05/04/2021')->format('d/m/Y'), 'y'=> 5000],
+                        ['x' => Carbon::parse('05/05/2021')->format('d/m/Y'), 'y'=> 5000],
+                        ['x' => Carbon::parse('05/06/2021')->format('d/m/Y'), 'y'=> 5000],
+                        ['x' => Carbon::parse('05/07/2021')->format('d/m/Y'), 'y'=> 5000],
+                        ['x' => Carbon::parse('05/08/2021')->format('d/m/Y'), 'y'=> 5000],
+                        ['x' => Carbon::parse('05/09/2021')->format('d/m/Y'), 'y'=> 5000],
+                        ['x' => Carbon::parse('05/10/2021')->format('d/m/Y'), 'y'=> 5000],
+                        ['x' => Carbon::parse('05/11/2021')->format('d/m/Y'), 'y'=> 5000],
+                        ['x' => Carbon::parse('05/12/2021')->format('d/m/Y'), 'y'=> 5000],
+                    ]
+            ],
+        ]
+        // 'datasets' => $datasets
+    ];
+
+    $data['activities'] = Activity::all();
+
+    return Inertia::render('Dashboard', $data);
 })->name('dashboard');
 
 //----- account route -----//

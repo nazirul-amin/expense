@@ -82,9 +82,9 @@
                 <h3 v-if="account.type_id==1">Cash</h3>
                 <h3 v-if="account.type_id==2">Bank</h3>
                 <h3 v-if="account.type_id==3">Card</h3>
-                <div><strong>Total : </strong>RM {{ account.balance }}</div>
-                <div><strong>Total : </strong>RM {{ account.created_at }}</div>
-                <div><strong>Total : </strong>RM {{ account.updated_at }}</div>
+                <div><strong>Balance : </strong>RM {{ account.balance }}</div>
+                <div><strong>Created : </strong>RM {{ account.created_at }}</div>
+                <div><strong>Updated : </strong>RM {{ account.updated_at }}</div>
                 <div class="flex justify-end mt-6">
                     <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('accounts.edit', account.id)">
                         <i class="las la-edit text-green-500">Edit</i>
@@ -95,7 +95,10 @@
                 </div>
             </div>
         </div>
-        <pagination :data="accounts"></pagination>
+        <div v-if="!accounts.data.length" class="flex bg-white rounded-2xl my-4 p-6 shadow-md justify-between md:hidden">
+            <h2>No accounts found.</h2>
+        </div>
+        <pagination v-if="accounts.data.length" :data="accounts"></pagination>
     </app-layout>
 </template>
 
