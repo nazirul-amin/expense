@@ -10,7 +10,7 @@
                 New Account
             </inertia-link>
         </div>
-        <div class="flex flex-col hidden md:block">
+        <div class="flex flex-col hidden lg:block">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -76,7 +76,7 @@
                 </div>
             </div>
         </div>
-        <div v-for="account in accounts.data" :key="account.id" class="flex bg-white rounded-2xl my-4 p-6 shadow-md justify-between md:hidden">
+        <!-- <div v-for="account in accounts.data" :key="account.id" class="flex bg-white rounded-2xl my-4 p-6 shadow-md justify-between md:hidden">
             <div class="flex flex-col flex-grow">
                 <h2>{{ account.name }}</h2>
                 <h3 v-if="account.type_id==1">Cash</h3>
@@ -94,8 +94,30 @@
                     </inertia-link>
                 </div>
             </div>
+        </div> -->
+
+        <div v-for="account in accounts.data" class="lg:hidden" style="transition: var(--transition); transition-delay: var(--transitionDelay2); background-color: white; border-radius: 5px; box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.03); overflow: hidden; margin-top: 30px;">
+            <div style="padding-left: 20px;padding-top: 20px;padding-right: 20px;display: flex;justify-content: space-between;align-items: center;">
+                <strong style="font-size: 20px;">{{ account.name }}</strong>
+                <span v-if="account.type_id==1" style="font-size: 14px;background-color: #dde2e7;padding: 4px 11px;border-radius: 20px;font-weight: 700;color: #5f6061;">Cash</span>
+                <span v-if="account.type_id==2" style="font-size: 14px;background-color: #dde2e7;padding: 4px 11px;border-radius: 20px;font-weight: 700;color: #5f6061;">Bank</span>
+                <span v-if="account.type_id==3" style="font-size: 14px;background-color: #dde2e7;padding: 4px 11px;border-radius: 20px;font-weight: 700;color: #5f6061;">Card</span>
+            </div>
+            <div style="padding: 20px; text-align: center;">
+                <div><strong>Balance : </strong>RM {{ account.balance }}</div>
+                <div><strong>Created : </strong>RM {{ account.created_at }}</div>
+                <div><strong>Updated : </strong>RM {{ account.updated_at }}</div>
+            </div>
+            <div style="padding: 20px;background-color: #f8f8f8;display: flex;justify-content: space-between;align-items: center;">
+                <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('accounts.edit', account.id)">
+                    <i class="las la-edit text-green-500">Edit</i>
+                </inertia-link>
+                <inertia-link class="text-indigo-600 hover:text-indigo-900" href="" @click="destroy(account.id)">
+                    <i class="las la-trash text-red-500">Delete</i>
+                </inertia-link>
+            </div>
         </div>
-        <div v-if="!accounts.data.length" class="flex bg-white rounded-2xl my-4 p-6 shadow-md justify-between md:hidden">
+        <div v-if="!accounts.data.length" class="flex bg-white rounded-2xl my-4 p-6 shadow-md justify-between lg:hidden">
             <h2>No accounts found.</h2>
         </div>
         <pagination v-if="accounts.data.length" :data="accounts"></pagination>

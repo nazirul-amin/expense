@@ -12,10 +12,6 @@
                 </div>
             </div>
         </div>
-        <ul></ul>
-        <ul v-for="activity in activities">
-            <li>Account with name: {{activity.properties.attributes.name}} and balance: {{activity.properties.attributes.balance}} has been {{activity.description}} (created at {{activity.properties.attributes.created_at}} updated at {{activity.properties.attributes.updated_at}})</li>
-        </ul>
     </app-layout>
 </template>
 
@@ -96,7 +92,6 @@
         },
         props: {
             charts: Object,
-            activities: Object,
         },
         mounted () {
             console.log(this.charts);
