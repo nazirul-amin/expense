@@ -20682,11 +20682,11 @@ var _hoisted_2 = {
   "class": "md:mt-5 flex justify-center items-center bg-blue-secondary w-full md:w-3/5 z-10 md:rounded-3xl mx-auto",
   style: {
     "backdrop-filter": "blur(2rem)",
-    "min-height": "90vh"
+    "height": "600px"
   }
 };
 var _hoisted_3 = {
-  "class": "bg-blue-light fixed top-28 md:top-44"
+  "class": "bg-blue-light fixed top-20 md:top-36"
 };
 var _hoisted_4 = {
   id: "primary_nav_menu",
@@ -43997,7 +43997,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-5663af57]::before {\n        content: \"\";\n        background-color: white;\n        transform: translate(0, 25%);\n        width: 100%;\n        height: 100%;\n        position: absolute;\n        left: 0;\n        bottom: 0;\n        z-index: -1;\n        overflow: auto;\n}\n@media only screen and (max-width: 600px) {\nmain[data-v-5663af57] {\n            min-height: 0%;\n            height: 600px;\n}\n}\n@media only screen and (min-width: 768px) {\n#primary_nav_menu[data-v-5663af57] {\n            width: 600px;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-5663af57]::before {\n        content: \"\";\n        background-color: white;\n        transform: translate(0, 20%);\n        width: 100%;\n        height: 100%;\n        position: absolute;\n        left: 0;\n        bottom: 0;\n        z-index: -1;\n}\n@media only screen and (min-width: 768px) {\nmain[data-v-5663af57] {\n            min-height: 90vh;\n            height: 100%;\n}\n#primary_nav_menu[data-v-5663af57] {\n            width: 600px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

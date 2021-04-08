@@ -14,8 +14,8 @@
 
 
             <!-- Page Content -->
-            <main class="md:mt-5 flex justify-center items-center bg-blue-secondary w-full md:w-3/5 z-10 md:rounded-3xl mx-auto" style="backdrop-filter: blur(2rem);min-height: 90vh;">
-                <nav class="bg-blue-light fixed top-28 md:top-44">
+            <main class="md:mt-5 flex justify-center items-center bg-blue-secondary w-full md:w-3/5 z-10 md:rounded-3xl mx-auto" style="backdrop-filter: blur(2rem);height: 600px;">
+                <nav class="bg-blue-light fixed top-20 md:top-36">
                     <!-- Primary Navigation Menu -->
                     <div id="primary_nav_menu" class="max-w-7xl md:max-w-none mx-auto px-4 px-8">
                         <div class="flex justify-center h-16 md:h-24">
@@ -110,22 +110,19 @@
     main::before {
         content: "";
         background-color: white;
-        transform: translate(0, 25%);
+        transform: translate(0, 20%);
         width: 100%;
         height: 100%;
         position: absolute;
         left: 0;
         bottom: 0;
         z-index: -1;
-        overflow: auto;
-    }
-    @media only screen and (max-width: 600px) {
-        main {
-            min-height: 0%;
-            height: 600px;
-        }
     }
     @media only screen and (min-width: 768px) {
+        main {
+            min-height: 90vh;
+            height: 100%;
+        }
         #primary_nav_menu {
             width: 600px;
         }
