@@ -14,11 +14,11 @@
 
 
             <!-- Page Content -->
-            <main class="md:mt-5 flex justify-center items-center bg-blue-secondary w-full md:w-3/5 z-10 md:rounded-3xl mx-auto" style="backdrop-filter: blur(2rem);height: 600px;">
-                <nav class="bg-blue-light fixed top-20 md:top-36">
+            <main class="lg:mt-5 flex justify-center items-center bg-blue-secondary w-full lg:w-3/5 z-10 lg:rounded-3xl mx-auto" style="backdrop-filter: blur(2rem);height: 600px;">
+                <nav class="bg-blue-light fixed top-20 md:top-60 lg:top-36">
                     <!-- Primary Navigation Menu -->
-                    <div id="primary_nav_menu" class="max-w-7xl md:max-w-none mx-auto px-4 px-8">
-                        <div class="flex justify-center h-16 md:h-24">
+                    <div id="primary_nav_menu" class="max-w-7xl lg:max-w-none mx-auto px-4 px-8">
+                        <div class="flex justify-center h-16 lg:h-24">
                             <div class="flex">
                                 <!-- Logo -->
                                 <!-- <div class="flex-shrink-0 flex items-center">
@@ -28,11 +28,11 @@
                                 </div> -->
 
                                 <!-- Navigation Links -->
-                                <div class="space-x-1 flex">
-                                    <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
+                                <div class="space-x-5 flex">
+                                    <!-- <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                         <img class="md:hidden" src="/images/home_30px.png">
-                                        <img class="hidden md:block" src="/images/home_48px.png">
-                                    </jet-nav-link>
+                                        <img class="flex flex-col hidden md:block" src="/images/home_48px.png">
+                                    </jet-nav-link> -->
                                     <jet-nav-link :href="route('accounts')" :active="route().current('accounts')">
                                         <img class="md:hidden" src="/images/money_bag_30px.png">
                                         <img class="hidden md:block" src="/images/money_bag_48px.png">
@@ -45,42 +45,14 @@
                                         <img class="md:hidden" src="/images/get_cash_30px.png">
                                         <img class="hidden md:block" src="/images/get_cash_48px.png">
                                     </jet-nav-link>
-                                    <jet-dropdown class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                        <template #trigger>
-                                            <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
-                                                <img class="h-8 w-8 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
-                                            </button>
-
-                                            <a v-else href="#">
-                                                <img class="md:hidden" src="/images/user_30px.png">
-                                                <img class="hidden md:block" src="/images/user_48px.png">
-                                            </a>
-                                        </template>
-
-                                        <template #content>
-                                            <!-- Account Management -->
-                                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                                {{ $page.props.user.name }}
-                                            </div>
-
-                                            <jet-dropdown-link :href="route('profile.show')">
-                                                Profile
-                                            </jet-dropdown-link>
-
-                                            <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
-                                                API Tokens
-                                            </jet-dropdown-link>
-
-                                            <div class="border-t border-gray-100"></div>
-
-                                            <!-- Authentication -->
-                                            <form @submit.prevent="logout">
-                                                <jet-dropdown-link as="button">
-                                                    Log Out
-                                                </jet-dropdown-link>
-                                            </form>
-                                        </template>
-                                    </jet-dropdown>
+                                    <jet-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
+                                        <img class="md:hidden" src="/images/user_30px.png">
+                                        <img class="hidden md:block" src="/images/user_48px.png">
+                                    </jet-nav-link>
+                                    <jet-nav-link @click="logout" href="#">
+                                        <img class="md:hidden" src="/images/exit_30px.png">
+                                        <img class="hidden md:block" src="/images/exit_48px.png">
+                                    </jet-nav-link>
                                     <!-- <jet-nav-link :href="route('credits')" :active="route().current('credits')">
                                         Credit
                                     </jet-nav-link> -->
@@ -93,8 +65,10 @@
                     <slot name="header"></slot>
                 </nav> -->
                 <section class="mt-60 lg:mt-0">
+                    <div class="m-8 lg:hidden" style="height: 50px"></div>
+                    <div class="m-8 hidden lg:block" style="height: 150px"></div>
                     <div class="m-8">
-                        <div class="cards" style="z-index: 3">
+                        <div class="cards" style="height: 550px; z-index: 3">
                             <slot></slot>
                         </div>
                     </div>
@@ -123,8 +97,26 @@
             min-height: 90vh;
             height: 100%;
         }
+        main::before {
+            transform: translate(0, 30%);
+        }
+        section {
+            width: 600px;
+        }
+    }
+    @media only screen and (min-width: 1200px) {
+        main {
+            min-height: 90vh;
+            height: 100%;
+        }
+        main::before {
+            transform: translate(0, 22%);
+        }
         #primary_nav_menu {
             width: 600px;
+        }
+        section {
+            width: 1000px;
         }
     }
 </style>

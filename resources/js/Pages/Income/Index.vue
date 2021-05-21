@@ -10,7 +10,7 @@
                 New Income
             </inertia-link>
         </div>
-        <div class="flex flex-col hidden md:block">
+        <div class="flex flex-col hidden lg:block">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -70,24 +70,30 @@
                 </div>
             </div>
         </div>
-        <div v-for="income in incomes.data" :key="income.id" class="flex bg-white rounded-2xl my-4 p-6 shadow-md justify-between md:hidden">
-            <div class="flex flex-col flex-grow">
-                <h2>{{ income.name }}</h2>
-                <h3>Account : {{ income.account.name }}</h3>
-                <div><strong>Total : </strong>RM {{ income.total }}</div>
-                <div><strong>Created at : </strong>RM {{ income.created_at }}</div>
-                <div><strong>Updated at : </strong>RM {{ income.updated_at }}</div>
-                <div class="flex justify-end mt-6">
-                    <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('incomes.edit', income.id)">
-                        <i class="las la-edit text-green-500">Edit</i>
-                    </inertia-link>
+
+        <div v-if="incomes.data.length" class="container mx-auto w-full h-full lg:hidden">
+            <div class="flex-grow flex flex-col bg-white border-t border-b sm:rounded sm:border shadow overflow-hidden">
+                <div v-for="income in incomes.data" :key="income.id" class="flex-grow flex px-6 py-6 text-grey-darker items-center border-b -mx-4">
+                    <div class="w-2/5 px-4 flex items-center">
+                        <span class="text-lg">{{ income.name }}</span>
+                    </div>
+                    <div class="flex w-3/5">
+                        <div class="w-1/2 px-4">
+                            <div class="text-right text-grey">{{ income.total }}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div v-if="!incomes.data.length" class="flex bg-white rounded-2xl my-4 p-6 shadow-md justify-between md:hidden">
+
+
+        <div v-if="!incomes.data.length" class="flex bg-white rounded-2xl my-4 p-6 shadow-md justify-between lg:hidden">
             <h2>No incomes found.</h2>
         </div>
-        <pagination v-if="incomes.data.length" :data="incomes"></pagination>
+
+        <div class="hidden lg:block">
+            <pagination v-if="incomes.data.length" :data="incomes"></pagination>
+        </div>
     </app-layout>
 </template>
 
