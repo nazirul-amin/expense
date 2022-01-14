@@ -80,11 +80,11 @@
         },
         methods: {
             update() {
-                this.form.put(this.route('accounts.update', this.account.id))
+                this.form.put(this.route('account.update', this.account.id))
             },
             destroy() {
                 if (confirm('Are you sure you want to delete this account?')) {
-                    this.$inertia.delete(this.route('accounts.destroy', this.account.id))
+                    this.$inertia.delete(this.route('account.destroy', this.account.id))
                 }
             },
         },

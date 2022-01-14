@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CreditController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Models\Transaction;
 use Carbon\Carbon;
@@ -119,11 +120,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 //----- account route -----//
     Route::middleware(['auth:sanctum', 'verified'])->get('/accounts', [AccountController::class, 'index'])->name('accounts');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/accounts/create', [AccountController::class, 'create'])->name('accounts.create');
-    Route::middleware(['auth:sanctum', 'verified'])->post('/accounts', [AccountController::class, 'store'])->name('accounts.store');
-    Route::middleware(['auth:sanctum', 'verified'])->get('/accounts/{account}/edit', [AccountController::class, 'edit'])->name('accounts.edit');
-    Route::middleware(['auth:sanctum', 'verified'])->put('/accounts/{account}', [AccountController::class, 'update'])->name('accounts.update');
-    Route::middleware(['auth:sanctum', 'verified'])->delete('/accounts/{account}', [AccountController::class, 'destroy'])->name('accounts.destroy');
+    Route::middleware(['auth:sanctum', 'verified'])->get('/accounts/{account}', [AccountController::class, 'show'])->name('account.show');
+    Route::middleware(['auth:sanctum', 'verified'])->get('/account/create', [AccountController::class, 'create'])->name('account.create');
+    Route::middleware(['auth:sanctum', 'verified'])->post('/accounts', [AccountController::class, 'store'])->name('account.store');
+    Route::middleware(['auth:sanctum', 'verified'])->get('/accounts/{account}/edit', [AccountController::class, 'edit'])->name('account.edit');
+    Route::middleware(['auth:sanctum', 'verified'])->put('/accounts/{account}', [AccountController::class, 'update'])->name('account.update');
+    Route::middleware(['auth:sanctum', 'verified'])->delete('/accounts/{account}', [AccountController::class, 'destroy'])->name('account.destroy');
 //----- account route -----//
 
 //----- expense route -----//
@@ -161,3 +163,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     Route::middleware(['auth:sanctum', 'verified'])->put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::middleware(['auth:sanctum', 'verified'])->delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 //----- user route -----//
+
+//----- transaction route -----//
+    Route::middleware(['auth:sanctum', 'verified'])->get('/transactions', [TransactionController::class, 'index'])->name('transactions');
+    Route::middleware(['auth:sanctum', 'verified'])->get('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
+    Route::middleware(['auth:sanctum', 'verified'])->post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
+//----- transaction route -----//

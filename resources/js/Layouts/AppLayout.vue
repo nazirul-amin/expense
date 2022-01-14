@@ -37,14 +37,14 @@
                                         <img class="md:hidden" src="/images/money_bag_30px.png">
                                         <img class="hidden md:block" src="/images/money_bag_48px.png">
                                     </jet-nav-link>
-                                    <jet-nav-link :href="route('expenses')" :active="route().current('expenses')">
+                                    <jet-nav-link :href="route('transactions')" :active="route().current('transactions')">
                                         <img class="md:hidden" src="/images/transaction_30px.png">
                                         <img class="hidden md:block" src="/images/transaction_48px.png">
                                     </jet-nav-link>
-                                    <jet-nav-link :href="route('incomes')" :active="route().current('incomes')">
+                                    <!-- <jet-nav-link :href="route('incomes')" :active="route().current('incomes')">
                                         <img class="md:hidden" src="/images/get_cash_30px.png">
                                         <img class="hidden md:block" src="/images/get_cash_48px.png">
-                                    </jet-nav-link>
+                                    </jet-nav-link> -->
                                     <jet-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
                                         <img class="md:hidden" src="/images/user_30px.png">
                                         <img class="hidden md:block" src="/images/user_48px.png">

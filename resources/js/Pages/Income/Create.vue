@@ -21,7 +21,7 @@
             </div>
 
             <div class="mt-2">
-                <jet-label for="account" value="Pay with" />
+                <jet-label for="account" value="Pay to" />
                 <select id="account" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.account">
                     <option value="">Please Choose</option>
                     <option v-for="account in accounts" :value="account.id">{{ account.name }}</option>

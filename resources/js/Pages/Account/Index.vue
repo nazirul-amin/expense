@@ -6,7 +6,7 @@
             </ol>
         </template>
         <div class="flex justify-end mb-6">
-            <inertia-link class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg" :href="route('accounts.create')">
+            <inertia-link class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg" :href="route('account.create')">
                 New Account
             </inertia-link>
         </div>
@@ -40,13 +40,15 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                                 <tr v-for="account in accounts.data" :key="account.id">
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">{{ account.name }}</div>
+                                        <inertia-link class="text-indigo-600 hover:text-indigo-900" :href="route('account.show', account.id)">
+                                            <div class="text-sm text-gray-900">{{ account.name }}</div>
+                                        </inertia-link>
                                         <div v-if="account.type_id==1" class="text-sm text-gray-500">Cash</div>
                                         <div v-if="account.type_id==2" class="text-sm text-gray-500">Bank</div>
                                         <div v-if="account.type_id==3" class="text-sm text-gray-500">Card</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ account.balance }}
+                                        RM {{ account.balance }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
@@ -58,7 +60,7 @@
                                         {{ account.updated_at }}
                                     </td>
                                     <td class="px-6 py-6 whitespace-nowrap text-right text-sm font-medium">
-                                        <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('accounts.edit', account.id)">
+                                        <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('account.edit', account.id)">
                                             <i class="las la-edit text-green-500">Edit</i>
                                         </inertia-link>
                                         <inertia-link class="text-indigo-600 hover:text-indigo-900" href="" @click="destroy(account.id)">
@@ -86,7 +88,7 @@
                 <div><strong>Created : </strong>RM {{ account.created_at }}</div>
                 <div><strong>Updated : </strong>RM {{ account.updated_at }}</div>
                 <div class="flex justify-end mt-6">
-                    <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('accounts.edit', account.id)">
+                    <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('account.edit', account.id)">
                         <i class="las la-edit text-green-500">Edit</i>
                     </inertia-link>
                     <inertia-link class="text-indigo-600 hover:text-indigo-900" href="" @click="destroy(account.id)">
@@ -98,7 +100,9 @@
 
         <div v-for="account in accounts.data" class="lg:hidden" style="transition: var(--transition); transition-delay: var(--transitionDelay2); background-color: white; border-radius: 5px; box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.03); overflow: hidden; margin-top: 30px;">
             <div style="padding-left: 20px;padding-top: 20px;padding-right: 20px;display: flex;justify-content: space-between;align-items: center;">
-                <strong style="font-size: 20px;">{{ account.name }}</strong>
+                <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('account.show', account.id)">
+                    <strong style="font-size: 20px;">{{ account.name }}</strong>
+                </inertia-link>
                 <span v-if="account.type_id==1" style="font-size: 14px;background-color: #dde2e7;padding: 4px 11px;border-radius: 20px;font-weight: 700;color: #5f6061;">Cash</span>
                 <span v-if="account.type_id==2" style="font-size: 14px;background-color: #dde2e7;padding: 4px 11px;border-radius: 20px;font-weight: 700;color: #5f6061;">Bank</span>
                 <span v-if="account.type_id==3" style="font-size: 14px;background-color: #dde2e7;padding: 4px 11px;border-radius: 20px;font-weight: 700;color: #5f6061;">Card</span>
@@ -109,7 +113,7 @@
                 <div><strong>Updated : </strong>RM {{ account.updated_at }}</div>
             </div>
             <div style="padding: 20px;background-color: #f8f8f8;display: flex;justify-content: space-between;align-items: center;">
-                <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('accounts.edit', account.id)">
+                <inertia-link class="text-indigo-600 hover:text-indigo-900 mr-6" :href="route('account.edit', account.id)">
                     <i class="las la-edit text-green-500">Edit</i>
                 </inertia-link>
                 <inertia-link class="text-indigo-600 hover:text-indigo-900" href="" @click="destroy(account.id)">
@@ -142,7 +146,7 @@
         methods: {
             destroy(id) {
                 if (confirm('Are you sure you want to delete this account?')) {
-                    this.$inertia.delete(this.route('accounts.destroy', id))
+                    this.$inertia.delete(this.route('account.destroy', id))
                 }
             },
         }

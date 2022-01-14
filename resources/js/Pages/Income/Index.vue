@@ -46,7 +46,7 @@
                                         {{ income.account.name }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ income.total }}
+                                        RM {{ income.total }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         {{ income.created_at }}

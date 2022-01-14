@@ -72,7 +72,7 @@
         },
         methods: {
             store() {
-                this.form.post(this.route('accounts.store'), {
+                this.form.post(this.route('account.store'), {
                     onSuccess: () => this.form.reset(),
                 })
             },

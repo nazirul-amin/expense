@@ -24,6 +24,11 @@ class Transaction extends Model
         return Carbon::parse($value)->format('d-m-Y');
     }
 
+    public function getTransactionTypeAttribute($value)
+    {
+        return TransactionType::where('id', $value)->first()->name;
+    }
+
     public function account()
     {
         return $this->belongsTo(Account::class);

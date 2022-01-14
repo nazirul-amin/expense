@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -56,7 +57,7 @@ class AccountController extends Controller
 
         $request->session()->flash('flash.banner', 'Account Created');
         $request->session()->flash('flash.bannerStyle', 'success');
-        return Redirect::route('accounts.create');
+        return Redirect::route('account.create');
     }
 
     /**
@@ -67,7 +68,11 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        //
+        $data['transactions'] = Transaction::with('account')->orderBy('name')
+            ->where('account_id', $account->id)
+            ->where('user_id', Auth::id())
+        ->paginate(10);
+        return Inertia::render('Transaction/Index', $data);
     }
 
     /**
